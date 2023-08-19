@@ -37,6 +37,13 @@
     "react-test-renderer": "18.2.0",
     "typescript": "4.8.4"
   },
+  "lint-staged": {
+    "./src/**/*.{js,jsx,ts,tsx}": [
+      "eslint --fix",
+      "prettier --write",
+      "bash -c tsc --noEmit"
+    ]
+  },
   "engines": {
     "node": ">=16"
   }
