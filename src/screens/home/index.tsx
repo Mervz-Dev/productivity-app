@@ -1,6 +1,6 @@
 import React from 'react'
 import {useNavigation} from '@react-navigation/native'
-import {View, Text, Button} from 'react-native'
+import {Stack, Button} from 'tamagui'
 
 const HomeScreen = () => {
   const navigation = useNavigation()
@@ -10,16 +10,15 @@ const HomeScreen = () => {
   }
 
   return (
-    <View
-      style={{
-        flex: 1,
-        width: '100%',
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}>
-      <Text>Home Screen</Text>
-      <Button title='Create Task' onPress={navigateToTask} />
-    </View>
+    <Stack
+      borderRadius={10}
+      flex={1}
+      justifyContent='center'
+      alignItems='center'>
+      <Button onPress={navigateToTask} size='$4'>
+        Create Task
+      </Button>
+    </Stack>
   )
 }
 
