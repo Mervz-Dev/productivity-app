@@ -1,5 +1,6 @@
 import React from 'react'
 import {View, Text} from 'react-native'
+import {Icon} from '../../components'
 
 const TaskScreen = () => {
   return (
@@ -11,6 +12,7 @@ const TaskScreen = () => {
         alignItems: 'center',
       }}>
       <Text>Task Screen</Text>
+      <Icon name='end-date' size={30} />
     </View>
   )
 }
