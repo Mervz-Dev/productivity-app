@@ -1,10 +1,11 @@
 import React from 'react'
 import {createIconSetFromIcoMoon} from 'react-native-vector-icons'
 import config from './selection.json'
+import {IconName} from './types'
 const Icon = createIconSetFromIcoMoon(config)
 
 type IconProps = {
-  name: string
+  name: IconName
   size?: number
   color?: string
 }
