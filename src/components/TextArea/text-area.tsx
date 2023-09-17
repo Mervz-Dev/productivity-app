@@ -21,3 +21,5 @@ export const TextArea = Tama.styled(Tama.TextArea, {
     },
   } as const,
 })
+
+export type TextAreaProps = Tama.GetProps<typeof TextArea>

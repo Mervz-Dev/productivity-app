@@ -20,3 +20,5 @@ export const Input = Tama.styled(Tama.Input, {
     },
   } as const,
 })
+
+export type InputProps = Tama.GetProps<typeof Input>

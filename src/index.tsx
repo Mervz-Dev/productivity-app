@@ -6,7 +6,7 @@ import config from '../tamagui.config'
 
 export default () => {
   return (
-    <TamaguiProvider config={config}>
+    <TamaguiProvider config={config} defaultTheme='light'>
       <Suspense>
         <NavigationContainer />
       </Suspense>

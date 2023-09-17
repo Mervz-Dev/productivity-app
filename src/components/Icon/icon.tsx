@@ -1,15 +1,18 @@
 import React from 'react'
 import {createIconSetFromIcoMoon} from 'react-native-vector-icons'
+import {} from 'react-native'
 import config from './selection.json'
 import {IconName} from './types'
 const IconComponent = createIconSetFromIcoMoon(config)
+import * as Tama from 'tamagui'
 
-export type IconProps = {
-  name: IconName
-  size?: number
-  color?: string
-}
+Tama.setupReactNative({IconComponent})
+const AppIcon = Tama.styled(IconComponent, {
+  name: 'AppIcon',
+})
 
-export const Icon = ({name, size = 12, color = '#000'}: IconProps) => {
-  return <IconComponent name={name} size={size} color={color} />
+type IconProps = Tama.GetProps<typeof AppIcon> & {name: IconName}
+
+export const Icon = (props: IconProps) => {
+  return <AppIcon color={'#000'} {...props} />
 }
