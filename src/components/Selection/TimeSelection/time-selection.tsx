@@ -85,7 +85,12 @@ export const TimeSelection = ({title, value, onSelect}: TimeSelectionProps) => {
         <Sheet.Handle />
         <Sheet.Frame w={'100%'} alignItems='center' p='$6' pt='$3'>
           <Text>Time Selection</Text>
-          <DatePicker mode='time' date={date} onDateChange={setDate} />
+          <DatePicker
+            mode='time'
+            date={date}
+            onDateChange={setDate}
+            minimumDate={new Date()}
+          />
           <XStack justifyContent='space-evenly' w='100%'>
             <Text onPress={handleCancel} color={'red'}>
               CANCEL
