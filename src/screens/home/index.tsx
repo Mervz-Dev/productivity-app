@@ -1,10 +1,11 @@
 import React from 'react'
-import {FlatList, ListRenderItem} from 'react-native'
+import {FlatList, ListRenderItem, Image} from 'react-native'
 import {useNavigation} from '@react-navigation/native'
 import {Stack, H4, Paragraph, Text, Card, H3, XStack} from 'tamagui'
 import {useTaskStore} from '@/store/taskStore'
 import {Icon} from '@/components'
 import {Task} from '@/types/task'
+import QuotesAnimation from './components/QuotesAnimation'
 
 const HomeScreen = () => {
   const navigation = useNavigation()
@@ -16,7 +17,7 @@ const HomeScreen = () => {
 
   const renderItem: ListRenderItem<Task> = ({item}) => {
     return (
-      <Card bordered marginVertical='$1.5' backgroundColor={'white'}>
+      <Card bordered marginVertical='$1.5' backgroundColor={'#FFFFFFB3'}>
         <Card.Header>
           <H4>{item.title}</H4>
           <Paragraph>{item.description}</Paragraph>
@@ -37,8 +38,27 @@ const HomeScreen = () => {
       flex={1}
       backgroundColor={'white'}
       paddingHorizontal='$3'>
+      <QuotesAnimation />
+      <Image
+        source={require('@/assets/image/mountain.jpg')}
+        style={{
+          width: '100%',
+          height: '100%',
+          position: 'absolute',
+          bottom: -260,
+          right: 10,
+          opacity: 0.5,
+        }}
+        resizeMode='contain'
+      />
+
+      {/* <Paragraph pt='$4' fontStyle='italic' alignSelf='center'>
+        "You miss 100% of the shots you don’t take."
+      </Paragraph> */}
+
       <FlatList
         stickyHeaderIndices={[0]}
+        showsVerticalScrollIndicator={false}
         ListHeaderComponent={() => {
           return (
             <XStack

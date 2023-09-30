@@ -23,9 +23,9 @@ const TaskScreen = () => {
   })
 
   const onSubmit = (values: Task) => {
-    navigation.goBack()
     addTask(values)
     reset()
+    navigation.goBack()
   }
 
   return (
