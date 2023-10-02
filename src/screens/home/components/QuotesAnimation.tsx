@@ -20,7 +20,6 @@ const QuoteAnimation = () => {
       useNativeDriver: false,
     }).start(() => {
       const nextIndex = index === QUOTES.length - 1 ? 0 : index + 1
-      console.log(nextIndex, 'next index')
       setCurrentQuoteIndex(nextIndex)
       //   fadeIn(nextIndex) // Start fading in the next quote
     })
@@ -33,7 +32,6 @@ const QuoteAnimation = () => {
       easing: Easing.linear,
       useNativeDriver: false,
     }).start(() => {
-      console.log('triggers')
       setTimeout(() => fadeOut(index), 5000) // Wait for 5 seconds before fading out
     })
   }

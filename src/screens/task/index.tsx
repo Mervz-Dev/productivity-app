@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 // import {Icon} from '@/components'
 import {TimeSelectionField, TextAreaField} from '@/components/Field'
 import {ScrollView, Spacer, Button, YStack} from 'tamagui'
@@ -8,6 +8,8 @@ import {Task} from '@/types/task'
 import {useNavigation} from '@react-navigation/native'
 import {yupResolver} from '@hookform/resolvers/yup'
 import validationSchema from './validationSchema'
+import notifee, {TimestampTrigger, TriggerType} from '@notifee/react-native'
+import {getMinHourValue} from '@/utils/time'
 
 const TaskScreen = () => {
   const navigation = useNavigation()
@@ -22,9 +24,39 @@ const TaskScreen = () => {
     resolver: yupResolver(validationSchema),
   })
 
-  const onSubmit = (values: Task) => {
+  useEffect(() => {
+    notifee
+      .getTriggerNotificationIds()
+      .then(ids => console.log('All trigger notifications: ', ids))
+  }, [])
+
+  const createTriggerNotification = async (item: Task) => {
+    const {hour, minute} = getMinHourValue(item.time)
+    const date = new Date(Date.now())
+    date.setHours(hour)
+    date.setMinutes(minute)
+    date.setSeconds(0)
+
+    const trigger: TimestampTrigger = {
+      type: TriggerType.TIMESTAMP,
+      timestamp: date.getTime(),
+    }
+
+    await notifee.createTriggerNotification(
+      {
+        id: '123',
+        title: item.title,
+        body: item.description,
+      },
+      trigger
+    )
+  }
+
+  const onSubmit = async (values: Task) => {
     addTask(values)
+    await createTriggerNotification(values)
     reset()
+
     navigation.goBack()
   }
 

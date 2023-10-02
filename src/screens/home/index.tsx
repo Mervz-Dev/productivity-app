@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import {FlatList, ListRenderItem, Image} from 'react-native'
 import {useNavigation} from '@react-navigation/native'
 import {Stack, H4, Paragraph, Text, Card, H3, XStack} from 'tamagui'
@@ -6,6 +6,7 @@ import {useTaskStore} from '@/store/taskStore'
 import {Icon} from '@/components'
 import {Task} from '@/types/task'
 import QuotesAnimation from './components/QuotesAnimation'
+import notifee, {AuthorizationStatus} from '@notifee/react-native'
 
 const HomeScreen = () => {
   const navigation = useNavigation()
@@ -14,6 +15,20 @@ const HomeScreen = () => {
   const navigateToTask = () => {
     navigation.navigate('Task')
   }
+
+  const requestUserPermission = async () => {
+    const settings = await notifee.requestPermission()
+
+    if (settings.authorizationStatus >= AuthorizationStatus.AUTHORIZED) {
+      console.log('Permission settings:', settings)
+    } else {
+      console.log('User declined permissions')
+    }
+  }
+
+  useEffect(() => {
+    requestUserPermission()
+  }, [])
 
   const renderItem: ListRenderItem<Task> = ({item}) => {
     return (
